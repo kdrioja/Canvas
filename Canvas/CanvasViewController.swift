@@ -10,21 +10,40 @@ import UIKit
 
 class CanvasViewController: UIViewController {
 
+    @IBOutlet weak var trayView: UIView!
+    var trayOriginalCenter: CGPoint!
+    var trayDownOffset: CGFloat!
+    var trayUp: CGPoint!
+    var trayDown: CGPoint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        trayDownOffset = 160
+        trayUp = trayView.center // The initial position of the tray
+        trayDown = CGPoint(x: trayView.center.x ,y: trayView.center.y + trayDownOffset) // The position of the tray transposed down
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func didPanTray(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        
+        if sender.state == .began {
+            trayOriginalCenter = trayView.center
+        }
+        else if sender.state == .changed {
+            trayView.center = CGPoint(x: trayOriginalCenter.x, y: trayOriginalCenter.y + translation.y)
+        }
+        else if sender.state == .ended {
+            var velocity = sender.velocity(in: view)
+            if velocity.y > 0 {
+                UIView.animate(withDuration: 0.3) {
+                    self.trayView.center = self.trayDown
+                }
+            } else {
+                UIView.animate(withDuration: 0.3) {
+                    self.trayView.center = self.trayUp
+                }
+            }
+        }
     }
-    */
-
 }

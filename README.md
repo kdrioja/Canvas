@@ -9,8 +9,8 @@ Time spent: **X** hours spent in total
 The following **required** user stories are complete:
 
 - [X] Add and Configure View Elements (+1pt)
-- [ ] User can use a pan gesture to move the position of the tray (+1pt)
-- [ ] The tray will continue to the up or down position based on the direction the user was last panning (+1pt)
+- [X] User can use a pan gesture to move the position of the tray (+1pt)
+- [X] The tray will continue to the up or down position based on the direction the user was last panning (+1pt)
 - [ ] User can use a pan gesture to drag faces from the image tray to the canvas (+1pt)
 - [ ] User can pan faces on the canvas (+1pt)
 
