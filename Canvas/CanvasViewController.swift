@@ -59,12 +59,35 @@ class CanvasViewController: UIViewController {
             newlyCreatedFace.center.y += trayView.frame.origin.y
             newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
             
+            newlyCreatedFace.isUserInteractionEnabled = true
+            
+            // Here we use the method didPan(sender:), which we defined in the previous step, as the action.
+            let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
+            
+            // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
+            view.isUserInteractionEnabled = true
+            view.addGestureRecognizer(panGestureRecognizer)
+
         }
         else if sender.state == .changed {
             newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
         }
         else if sender.state == .ended {
             
+        }
+    }
+    
+    @objc func didPan(sender: UIPanGestureRecognizer) {
+        //let location = sender.location(in: view)
+        //let velocity = sender.velocity(in: view)
+        let translation = sender.translation(in: view)
+        
+        if sender.state == .began {
+            newlyCreatedFace = sender.view as? UIImageView // to get the face that we panned on.
+            newlyCreatedFaceOriginalCenter = newlyCreatedFace.center // so we can offset by translation later.
+        } else if sender.state == .changed {
+            newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+        } else if sender.state == .ended {
         }
     }
 }
