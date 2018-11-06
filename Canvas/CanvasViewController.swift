@@ -20,7 +20,7 @@ class CanvasViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        trayDownOffset = 160
+        trayDownOffset = 230
         trayUp = trayView.center // The initial position of the tray
         trayDown = CGPoint(x: trayView.center.x ,y: trayView.center.y + trayDownOffset) // The position of the tray transposed down
     }
@@ -62,11 +62,11 @@ class CanvasViewController: UIViewController {
             newlyCreatedFace.isUserInteractionEnabled = true
             
             // Here we use the method didPan(sender:), which we defined in the previous step, as the action.
-            let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
+            //let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(sender:)))
             
             // Attach it to a view of your choice. If it's a UIImageView, remember to enable user interaction
             view.isUserInteractionEnabled = true
-            view.addGestureRecognizer(panGestureRecognizer)
+            //view.addGestureRecognizer(panGestureRecognizer)
 
         }
         else if sender.state == .changed {
